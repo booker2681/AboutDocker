@@ -32,6 +32,7 @@
 
 
 # Docker Instructions
+* docker exec -ti "你的名稱" bash (進入container)
 * docker ps -a (查看所有container)
 * docker ps (查看開啟中的container)
 * docker start "你的名稱" (啟動)
@@ -43,6 +44,7 @@
 * docker system prune -a (可清理一些沒使用的image與關閉的container)
 * docker rm -v $(docker ps -a -q -f status=exited) (删除沒有開啟的container)
 * docker volume rm $(docker volume ls -qf dangling=true) (刪除沒有掛載的volume)
+* docker run -v 'outerdir':'innerdir' (container 使用外部資料夾)
 
 # Docker Image
 * docker pull 名稱 (下載image)
