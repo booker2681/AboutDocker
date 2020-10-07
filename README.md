@@ -10,7 +10,7 @@
 * docker run -itd (container 使用標準輸入並在背景執行)
 
 # Docker Instructions
-* docker exec -ti "你的名稱" bash (進入container)
+* docker exec -it "你的名稱" bash (使用bash進入container)
 * docker ps -a (查看所有container)
 * docker ps (查看開啟中的container)
 * docker start "你的名稱" (啟動)
