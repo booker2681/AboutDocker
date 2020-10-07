@@ -1,35 +1,13 @@
 # AboutDocker
 
-實驗室的dockerfile
-> ### 目前建議使用 docker-for-ai-dev
-[docker-for-ai-dev 指令產生器](https://p208p2002.github.io/docker-for-ai-dev/)
-
-# Usage
-* ubuntu 16.04
-  * docker pull harryzhan/udic_ub16_ssh 
-  * docker run -idt -p "ssh的port":22 --name "你的名稱" harryzhan/udic_ub16_ssh
-  * docker exec -ti "你的名稱" bash (進入container)
-  * passwd (建立root密碼)
-  * ----即可遠端登入 使用者名稱為root----
-  *  ./createDocker_harry.sh  (快速建立方法) (記得先修改檔案權限 chmod 777)
-  *  (遇到 Text file busy 問題 用vim開啟檔案輸入 :set ff=unix 變更文件格式)
-
-* nvidia docker
-  * 目前有三個版本如下:
-  * harryzhan/udic_nvidia_docker (tensorflow1.0) 大學長始祖版 未來可能不在維護 
-  * udiclab/udic_nvidia_docker:tf1.15_torch1.3 (tensorflow1.5 & pytorch1.3) 實驗室目前預設版
-* nvidia docker 使用
-  * docker pull udiclab/udic_nvidia_docker 視需求與版本
-  * sudo nvidia-docker run -itd -p $USER_PORT:22 -p $NOTEBOOK_PORT:8888 -p $TENSORBOARD_PORT:6006 --name "你的名稱" --hostname "你的名稱 "udiclab/udic_nvidia_docker
-  * docker exec -ti "你的名稱" bash (進入container)
-  * passwd (建立root密碼)
-  * ----即可遠端登入 使用者名稱為root----
-  *  ./createNvidiaDocker_udiclab.sh  (快速建立方法) (記得先修改檔案權限 chmod 777)
-  *  (遇到 Text file busy 問題 用vim開啟檔案輸入 :set ff=unix 變更文件格式)
-  
-* volume (container 使用外部資料夾)
-  * docker run -v 'outerdir':'innerdir'
-
+# Docker create container
+* docker run --restart=always --gpus all -itd -p SSH_PORT:22 -p JUPYTER_PORT:8888 -p VSCODE_PORT:8080 -e"NAME=..." -e"PASSWORD=..." IMAGE (example)
+* docker run -v OUTER_DIR:INNER_DIR (container 使用外部資料夾)
+* docker run -p OUTER_PORT:INNER_PORT (container 自定義PORT)
+* docker run --restart=always (container 自動重啟)
+* docker run --gpus all (container 使用GPU資源)
+* docker run -e "NAME=..." (container 定義內部環境變數)
+* docker run -itd (container 使用標準輸入並在背景執行)
 
 # Docker Instructions
 * docker exec -ti "你的名稱" bash (進入container)
@@ -44,7 +22,6 @@
 * docker system prune -a (可清理一些沒使用的image與關閉的container)
 * docker rm -v $(docker ps -a -q -f status=exited) (删除沒有開啟的container)
 * docker volume rm $(docker volume ls -qf dangling=true) (刪除沒有掛載的volume)
-* docker run -v 'outerdir':'innerdir' (container 使用外部資料夾)
 
 # Docker Image
 * docker pull 名稱 (下載image)
@@ -66,9 +43,3 @@
   * vim /var/lib/docker/containers/"container ID"/hostconfig.json
 * step4: 重啟docker
   * sudo service docker start
-
-[Docker Change Port Mapping for an Existing Container](https://mybrainimage.wordpress.com/2017/02/05/docker-change-port-mapping-for-an-existing-container/)
-
-[Tensorflow GPU setup on ubuntu 16.04](https://gist.github.com/theshaneyu/d9eda9f6f4fd9c8f4c75a4546f170a4e)
-
-[Tensorflow GPU setup on ubuntu 18.04](https://gist.github.com/booker2681/80678885f1328be56399c701ea7af2c2)
