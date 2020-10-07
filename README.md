@@ -1,12 +1,12 @@
 # AboutDocker
 
 # Docker create container
-* docker run --restart=always --gpus all -itd -p SSH_PORT:22 -p JUPYTER_PORT:8888 -p VSCODE_PORT:8080 -e"NAME=..." -e"PASSWORD=..." IMAGE (example)
+* docker run --restart=always --gpus all -itd --name NAME -p SSH_PORT:22 -p JUPYTER_PORT:8888 -p VSCODE_PORT:8080 -e"NAME=..." -e"PASSWORD=..." IMAGE (example)
 * docker run -v OUTER_DIR:INNER_DIR (container 使用外部資料夾)
 * docker run -p OUTER_PORT:INNER_PORT (container 自定義PORT)
 * docker run --restart=always (container 自動重啟)
 * docker run --gpus all (container 使用GPU資源)
-* docker run -e "NAME=..." (container 定義內部環境變數)
+* docker run -e "KEY=VALUE" (container 定義內部環境變數)
 * docker run -itd (container 使用標準輸入並在背景執行)
 
 # Docker Instructions
